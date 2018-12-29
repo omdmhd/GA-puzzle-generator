@@ -2,8 +2,8 @@ import sqlite3
 
 class Db:
     def __init__(self, dbname="data.db"):
-        self.conn = sqlite3.connect('db/data.db')
-
+        self.conn = sqlite3.connect('data.db')
+        
     def commit(self):
         self.conn.commit()
 
@@ -11,9 +11,9 @@ class Db:
         c = self.conn.cursor()
         return c
 
-    def execute(self, q):
+    def execute(self, q, par=[]):
         c = self.cursor()
-        c.execute(q)
+        c.execute(q, par)
         self.conn.commit()
 
     def execute_and_fetch(self, q, par=[], type='a'):

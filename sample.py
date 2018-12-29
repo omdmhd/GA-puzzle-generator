@@ -1,6 +1,7 @@
 class Sample:
-    def __init__(self, data):
-        self.data = data
+    def __init__(self, skeleton , spellcheck):
+        self.skeleton = skeleton
+        self.spellcheck = spellcheck
     
     def fill_rows_with_random(self):
         pass

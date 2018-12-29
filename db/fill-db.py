@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-from db import conn
+from database import Db
+db = Db()
+#db.execute('CREATE TABLE words(name VARCHAR(200) PRIMARY KEY) ;')
 
-c = conn.cursor()
-#c.execute('CREATE TABLE words(name VARCHAR(200) PRIMARY KEY) ;')
-
-f = open("Farsi to English Advanced.dict", "r")
+f = open("import/Farsi to English Advanced.dict", "r")
 array = f.readlines()
 
 def just_pick_persian_chars(sentence):
@@ -19,9 +18,8 @@ def just_pick_persian_chars(sentence):
     return text
 
 def check_word_exists(word):
-    c.execute("SELECT COUNT(*) as count FROM words WHERE name = ?",  (word, ) )
-    count = c.fetchone()
-#    print(count[0])
+    global db
+    count = db.execute_and_fetch("SELECT COUNT(*) as count FROM words WHERE name = ?",  (word, ), 'o' )
     if int(count[0]) >= 1:
         return True
     return False
@@ -31,9 +29,6 @@ for line in array:
     words = line.split(" ")
     for word in words:
         if len(word) > 2:
-#            print(word)
-#            print(check_word_exists(word))
             if not check_word_exists(word):
-                c.execute("INSERT INTO words(name) values(?) ", (word, ))
-                conn.commit()
+                db.execute("INSERT INTO words(name) values(?) ", (word, ))
 

@@ -1,3 +1,4 @@
 db/data.db
 */*.pyc
 __pycache__/
+db/import/*

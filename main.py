@@ -6,9 +6,9 @@
     Population Trimming
     Aggregation
 '''
-from skeleton import Skeleton
+from input.skeleton import Skeleton
 from population import Population
-
+from spell_check import spellcheck
 skeleton = Skeleton()
 skeleton.read_skeleton_from_file('input/sample.txt')
 N = input('Enter N : ')
@@ -16,7 +16,7 @@ M = input('Enter Population Size')
 Sets = []
 
 for i in range(0, N):
-    population = Population(M)
+    population = Population(skeleton, M, spellcheck)
     Sets.append(population)
 
 for population in Sets:
@@ -25,6 +25,8 @@ for population in Sets:
 for population in Sets:
     population.trim()
 
+
 '''
     Aggregation
+    and display
 '''

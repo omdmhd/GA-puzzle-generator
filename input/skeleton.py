@@ -5,3 +5,4 @@ class Skeleton:
     def read_skeleton_from_file(self, filename):
         pass
     
+    
